@@ -4,7 +4,7 @@ A data generation app for test data purpose.
 Move src/main/resources/example-application.properties to src/main/resources/application.properties
 and setup your database parameters.
 
-## Client generatoin URL
+## Client generation URL
 http://localhost:8088/api/test/upload
 
 ## Event history generation URL
