@@ -14,4 +14,4 @@ http://localhost:8088/api/test/upload-events?start=2024-05-01&end=2024-06-01
 http://localhost:8088/swagger-ui/index.html
 
 ## RestAPI doc
-http://localhost:8080/v3/api-docs
+http://localhost:8088/v3/api-docs
