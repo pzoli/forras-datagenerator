@@ -112,9 +112,7 @@ class TestController(
             val eventHistory = EventHistory()
             if (cal.get(Calendar.HOUR_OF_DAY) > 17) {
                 cal.set(Calendar.HOUR_OF_DAY, 8)
-                cal.add(Calendar.DATE, 1) // adds one hour
-                subjects.clear()
-                subjects.addAll(originSubjects.toList())
+                cal.add(Calendar.DATE, 1)
             }
             if (cal.get(Calendar.DAY_OF_WEEK) == 7) {
                 cal.add(Calendar.DATE, 2)
@@ -129,6 +127,9 @@ class TestController(
                 eventHistory.createdDate = Date()
                 eventHistory.version = 0
                 eventHistory.leaders = listOf(user.get())
+                if (subjects.isEmpty()) {
+                    subjects.addAll(originSubjects.toList())
+                }
                 subjects = subjects.shuffled().toMutableList()
                 eventHistory.subject = subjects.removeFirst()
                 eventHistory.title = eventHistory.subject.title
