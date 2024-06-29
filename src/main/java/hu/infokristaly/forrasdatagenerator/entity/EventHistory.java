@@ -183,7 +183,7 @@ public class EventHistory extends EventData implements Serializable {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "event_leader", joinColumns = { @JoinColumn(name = "event_id", referencedColumnName = "eventid") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "userid") })
+    @JoinTable(name = "event_leader", joinColumns = { @JoinColumn(name = "event_id", referencedColumnName = "eventid") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
     @Override
     public List<SystemUser> getLeaders() {
         return super.getLeaders();

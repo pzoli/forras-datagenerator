@@ -65,30 +65,35 @@ class TestController(
     }
     @GetMapping("/upload")
     fun uploadClient(): ResponseEntity<List<Client>> {
-        val user = systemUserRepository.findById(1)
-        val doctor = doctorRepository.findById(1)
-        val clients = mutableListOf<Client>()
-        val clientTypes = clientTypeRepository.findAll()
-        val felvetelDatuma = Date.from(LocalDate.of(2020,1,1).atStartOfDay(ZoneId.systemDefault()).toInstant())
-        getRandomNames().forEach{ neve ->
-            val client = Client()
-            client.neve = neve
-            client.nyilvantartasiSzam = getRandomNYSzam()
-            client.active = true
-            client.createDate = Date()
-            client.created_by = user.get()
-            client.currentManager = user.get()
-            client.currentDoctor = doctor.get()
-            client.felvetDatum = felvetelDatuma
-            client.szuletesiHely = "Budapest"
-            client.szuletesiIdo = getRandomDate()
-            client.taj = getRandomTAJ()
-            client.version = 0
-            client.clientType = clientTypes.shuffled().first()
-            val savedUser =clientRepository.save(client)
-            clients.add(savedUser)
+        try {
+            val user = systemUserRepository.findById(1)
+            val doctor = doctorRepository.findById(1)
+            val clients = mutableListOf<Client>()
+            val clientTypes = clientTypeRepository.findAll()
+            val felvetelDatuma = Date.from(LocalDate.of(2020, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant())
+            getRandomNames().forEach { neve ->
+                val client = Client()
+                client.neve = neve
+                client.nyilvantartasiSzam = getRandomNYSzam()
+                client.active = true
+                client.createDate = Date()
+                client.created_by = user.get()
+                client.currentManager = user.get()
+                client.currentDoctor = doctor.get()
+                client.felvetDatum = felvetelDatuma
+                client.szuletesiHely = "Budapest"
+                client.szuletesiIdo = getRandomDate()
+                client.taj = getRandomTAJ()
+                client.version = 0
+                client.clientType = clientTypes.shuffled().first()
+                val savedUser = clientRepository.save(client)
+                clients.add(savedUser)
+            }
+            return ResponseEntity(clients, HttpStatus.OK)
+        } catch (e:Exception) {
+            println(e.localizedMessage)
+            return ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR)
         }
-        return ResponseEntity(clients,HttpStatus.OK)
     }
 
     @GetMapping("/upload-events")

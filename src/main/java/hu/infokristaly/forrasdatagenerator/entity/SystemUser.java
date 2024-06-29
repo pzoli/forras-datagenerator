@@ -1,146 +1,340 @@
 package hu.infokristaly.forrasdatagenerator.entity;
 
-import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Basic;
+
+// Generated 2012.09.26. 11:18:58 by Hibernate Tools 4.0.0
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Version;
 
 @Entity
-@Cacheable(value=true)
-@Table(name="systemuser")
-public class SystemUser implements Serializable {
+@Table(name = "systemuser", schema = "public")
+public class SystemUser implements java.io.Serializable {
 
-    private static final long serialVersionUID = 1899784687816530303L;
+	private static final long serialVersionUID = 4103231713043595259L;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long userid;
-    
-    @Basic
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
+
+	@Column(name = "osusername", length = 128)
+	private String osUserName;
+
+	@ManyToOne
+	@JoinColumn(name = "organizationunit")
+	private Organizationunit organizationunit;
+
+	@Basic
+	@Column(name = "username")
+	private String userName;
+
+	@Column(name = "vcard")
+	@Lob
+	private String vCard;
+
+	@Column(name = "photo")
+	@Lob
+	private byte[] photo;
+
+	@Column(name = "sqlserverloginname", length = 50, unique = true)
+	private String sqlserverloginname;
+
+	@ManyToOne
+	@JoinColumn(name = "usergroup")
+	private Usergroup usergroup;
+
+	@Column(name = "osuserpassword")
+	private String osUserPassword;
+
+	@Column(name = "enabled")
+	private Boolean enabled;
+
+	private String comment;
+
+	@ManyToOne
+	@JoinColumn(name = "language")
+	private Language language;
+
+	@Basic
     @Column(name="emailaddress")
     private String emailAddress;
-    
-    @Basic
-    private boolean enabled;
-
     @Column(name="casemanager")
     @Basic
     private Boolean caseManager = false;
-
-    @Basic
-    private String userpassword;
-    
-    @Basic
-    private String username;
-    
     @Basic
     @Column(name="adminuser")
     private boolean adminUser = false;
-    
     @Basic
     @Column(name="pincode")
     private String pinCode;
-    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="deleteddate")
     private Date deletedDate;
-        
-    public Long getUserid() {
-        return userid;
-    }
-    
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
-    
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-    
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-    
-    public boolean isEnabled() {
-        return enabled;
-    }
-    
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-    
-    public String getUserpassword() {
-        return userpassword;
-    }
-    
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword;
-    }
-    
-    public String getUsername() {
-        return username;
-    }
-    
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@Version
+	private Long version;
 
-    public boolean isAdminUser() {
-        return adminUser;
-    }
+	public SystemUser() {
+	}
 
-    public void setAdminUser(boolean adminUser) {
-        this.adminUser = adminUser;
-    }
+	public SystemUser(Long id) {
+		this.id = id;
+	}
 
-    public Boolean getCaseManager() {
-        return caseManager;
-    }
+	public SystemUser(Long id, String userName, String osUserName, Organizationunit organizationunit, String vCard, byte[] photo, String sqlserverloginname, Usergroup usergroup) {
+		this.id = id;
+		this.userName = userName;
+		this.osUserName = osUserName;
+		this.organizationunit = organizationunit;
+		this.vCard = vCard;
+		this.photo = photo;
+		this.sqlserverloginname = sqlserverloginname;
+		this.usergroup = usergroup;
+	}
 
-    public void setCaseManager(Boolean caseManager) {
-        this.caseManager = caseManager;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public String getPinCode() {
-        return pinCode;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setPinCode(String pinCode) {
-        this.pinCode = pinCode;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public Date getDeletedDate() {
-        return deletedDate;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public void setDeletedDate(Date deletedDate) {
-        this.deletedDate = deletedDate;
-    }
+	public String getOsUserName() {
+		return this.osUserName;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getUserid() == null) ? 0 : getUserid().hashCode());
-        return result;
-    }
+	public void setOsUserName(String osusername) {
+		this.osUserName = osusername;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof SystemUser))
-            return false;
-        SystemUser other = (SystemUser) obj;
-        if (getUserid() == null) {
-            if (other.getUserid() != null)
-                return false;
-        } else if (!getUserid().equals(other.getUserid()))
-            return false;
-        return true;
-    }
+	public Organizationunit getOrganizationunit() {
+		return this.organizationunit;
+	}
+
+	public void setOrganizationunit(Organizationunit organizationunit) {
+		this.organizationunit = organizationunit;
+	}
+
+	public String getVCard() {
+		return this.vCard;
+	}
+
+	public void setVCard(String vCard) {
+		this.vCard = vCard;
+	}
+
+	public byte[] getPhoto() {
+		return this.photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public String getSqlserverloginname() {
+		return this.sqlserverloginname;
+	}
+
+	public void setSqlserverloginname(String sqlserverloginname) {
+		this.sqlserverloginname = sqlserverloginname;
+	}
+
+	public Usergroup getUsergroup() {
+		return this.usergroup;
+	}
+
+	public void setUsergroup(Usergroup usergroup) {
+		this.usergroup = usergroup;
+	}
+
+	public String getOsUserPassword() {
+		return osUserPassword;
+	}
+
+	public void setOsUserPassword(String osUserPassword) {
+		this.osUserPassword = osUserPassword;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public Boolean getCaseManager() {
+		return caseManager;
+	}
+
+	public void setCaseManager(Boolean caseManager) {
+		this.caseManager = caseManager;
+	}
+
+	public boolean getAdminUser() {
+		return adminUser;
+	}
+
+	public void setAdminUser(boolean adminUser) {
+		this.adminUser = adminUser;
+	}
+
+	public String getPinCode() {
+		return pinCode;
+	}
+
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+
+	public Date getDeletedDate() {
+		return deletedDate;
+	}
+
+	public void setDeletedDate(Date deletedDate) {
+		this.deletedDate = deletedDate;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+		result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((organizationunit == null) ? 0 : organizationunit.hashCode());
+		result = prime * result + ((osUserName == null) ? 0 : osUserName.hashCode());
+		result = prime * result + ((osUserPassword == null) ? 0 : osUserPassword.hashCode());
+		result = prime * result + Arrays.hashCode(photo);
+		result = prime * result + ((sqlserverloginname == null) ? 0 : sqlserverloginname.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((usergroup == null) ? 0 : usergroup.hashCode());
+		result = prime * result + ((vCard == null) ? 0 : vCard.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SystemUser other = (SystemUser) obj;
+		if (comment == null) {
+			if (other.comment != null)
+				return false;
+		} else if (!comment.equals(other.comment))
+			return false;
+		if (enabled == null) {
+			if (other.enabled != null)
+				return false;
+		} else if (!enabled.equals(other.enabled))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
+		if (organizationunit == null) {
+			if (other.organizationunit != null)
+				return false;
+		} else if (!organizationunit.equals(other.organizationunit))
+			return false;
+		if (osUserName == null) {
+			if (other.osUserName != null)
+				return false;
+		} else if (!osUserName.equals(other.osUserName))
+			return false;
+		if (osUserPassword == null) {
+			if (other.osUserPassword != null)
+				return false;
+		} else if (!osUserPassword.equals(other.osUserPassword))
+			return false;
+		if (!Arrays.equals(photo, other.photo))
+			return false;
+		if (sqlserverloginname == null) {
+			if (other.sqlserverloginname != null)
+				return false;
+		} else if (!sqlserverloginname.equals(other.sqlserverloginname))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		if (usergroup == null) {
+			if (other.usergroup != null)
+				return false;
+		} else if (!usergroup.equals(other.usergroup))
+			return false;
+		if (vCard == null) {
+			if (other.vCard != null)
+				return false;
+		} else if (!vCard.equals(other.vCard))
+			return false;
+		return true;
+	}
 
 }

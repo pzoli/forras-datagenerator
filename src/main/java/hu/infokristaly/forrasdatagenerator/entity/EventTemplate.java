@@ -121,7 +121,7 @@ public class EventTemplate extends EventData implements Serializable {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "template_leader", joinColumns = { @JoinColumn(name = "template_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "userid") })
+    @JoinTable(name = "template_leader", joinColumns = { @JoinColumn(name = "template_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
     @Override
     public List<SystemUser> getLeaders() {
         return super.getLeaders();

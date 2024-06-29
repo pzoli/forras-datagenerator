@@ -77,7 +77,7 @@ public class GroupForClients implements Serializable {
 
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "group_leaders", joinColumns = { @JoinColumn(name = "group_id", referencedColumnName="id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName="userid") })
+    @JoinTable(name = "group_leaders", joinColumns = { @JoinColumn(name = "group_id", referencedColumnName="id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName="id") })
 	public List<SystemUser> getLeaders() {
 		return leaders;
 	}
