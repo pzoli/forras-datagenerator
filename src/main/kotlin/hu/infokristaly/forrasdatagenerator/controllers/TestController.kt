@@ -103,7 +103,6 @@ class TestController(
         val originSubjects = subjectRepository.findAll()
         var subjects: MutableList<Subject> = mutableListOf()
         subjects.addAll(originSubjects.toList())
-        val result = mutableListOf<EventHistory>()
         val cal = Calendar.getInstance()
         val formatter = DateTimeFormatterBuilder()
         val endDate = Date.from(LocalDate.parse(end, DateTimeFormatter.ISO_LOCAL_DATE).atStartOfDay(ZoneId.systemDefault()).toInstant())
@@ -139,10 +138,9 @@ class TestController(
                 eventHistory.subject = subjects.removeFirst()
                 eventHistory.title = eventHistory.subject.title
                 eventHistoryRepositry.save(eventHistory)
-                result.add(eventHistory)
             }
         }
-        return ResponseEntity(result,HttpStatus.OK)
+        return ResponseEntity(HttpStatus.OK)
     }
 
 }

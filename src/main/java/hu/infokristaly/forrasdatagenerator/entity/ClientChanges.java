@@ -21,7 +21,7 @@ public class ClientChanges implements Serializable {
 	private Date periodStart;
 	private Date modifiedAt;
 	private SystemUser modifiedBy;
-	private Byte changeType = new Byte((byte)0);
+	private Byte changeType = (byte)0;
 	
 	public ClientChanges() {
 	}

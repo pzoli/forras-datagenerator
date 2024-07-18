@@ -33,7 +33,7 @@ public class Organizationunit implements java.io.Serializable {
     private static final long serialVersionUID = -576319707322945129L;
     
     private Long id;
-    private Company company;
+    private Organization organization;
     private String organizationunitName;
     private String shortname;
     private String description;
@@ -52,9 +52,9 @@ public class Organizationunit implements java.io.Serializable {
         this.id = id;
     }
 
-    public Organizationunit(Long id, Company company, String organizationunitName, String shortname, String description, Boolean registerunit, Boolean onlyregister, Icon icon) {
+    public Organizationunit(Long id, Organization organization, String organizationunitName, String shortname, String description, Boolean registerunit, Boolean onlyregister, Icon icon) {
         this.id = id;
-        this.company = company;
+        this.organization = organization;
         this.organizationunitName = organizationunitName;
         this.shortname = shortname;
         this.description = description;
@@ -76,13 +76,13 @@ public class Organizationunit implements java.io.Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "company")
-    public Company getCompany() {
-        return this.company;
+    @JoinColumn(name = "organization")
+    public Organization getOrganization() {
+        return this.organization;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     @Column(name = "organizationunit", length = 128)
@@ -163,7 +163,7 @@ public class Organizationunit implements java.io.Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
-		result = prime * result + ((company == null) ? 0 : company.hashCode());
+		result = prime * result + ((organization == null) ? 0 : organization.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((icon == null) ? 0 : icon.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -188,10 +188,10 @@ public class Organizationunit implements java.io.Serializable {
 				return false;
 		} else if (!addresses.equals(other.addresses))
 			return false;
-		if (company == null) {
-			if (other.company != null)
+		if (organization == null) {
+			if (other.organization != null)
 				return false;
-		} else if (!company.equals(other.company))
+		} else if (!organization.equals(other.organization))
 			return false;
 		if (description == null) {
 			if (other.description != null)
